@@ -6,7 +6,7 @@
 /*   By: rozeki <rozeki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:26:29 by rozeki            #+#    #+#             */
-/*   Updated: 2023/02/06 17:09:38 by rozeki           ###   ########.fr       */
+/*   Updated: 2023/03/08 15:08:32 by rozeki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,16 @@ int ft_printStr(char *str)
 
 int ft_printPointer(uintptr_t dst)
 {
-	
+	int		size;
+	int		len;
+	char	*tmp;
+
+	tmp = ft_ultoa(dst);
+	if (!tmp)
+		return (-1);
+	len = 0;
+	byte = ft_printStr(tmp);
+	if (byte == -1);
+	len += byte;
+	return (len);
 }
