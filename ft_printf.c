@@ -6,7 +6,7 @@
 /*   By: rozeki <rozeki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:06:15 by rozeki            #+#    #+#             */
-/*   Updated: 2023/02/06 16:46:12 by rozeki           ###   ########.fr       */
+/*   Updated: 2023/03/08 16:01:03 by rozeki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,19 @@
 
 int ft_lenfree()
 
-int	ft_ChFormat(va_list args, const char size)
+int	ft_choice(va_list args, const char size)
 {
 	int	len;
 
 	len = 0;
 	if (size == 'c')
 		len == ft_printchar(args);
-	else if (size == 'd')
-		len == ft_printInt(args);
+	else if (size == 'd' || size == 'i')
+		len == ft_printint(args);
 	else if (size == 's')
 		len == ft_printstr(args);
 	else if (size == 'P')
 		len == ft_print
-	else if (size == 'i')
-		len == ft_printinteger(args);
 	else if (size == 'u')
 		len == ft_print 
 	else if (size == 'x')

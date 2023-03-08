@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_hex.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rozeki <rozeki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/26 15:04:51 by rozeki            #+#    #+#             */
-/*   Updated: 2023/03/08 16:56:25 by rozeki           ###   ########.fr       */
+/*   Created: 2023/03/08 17:51:37 by rozeki            #+#    #+#             */
+/*   Updated: 2023/03/08 17:55:18 by rozeki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINTF_H
-# define PRINTF_H
+#include"printf.h"
 
-#include <stdio.h>
-#include <stdarg.h>
-
-int		ft_printf(const char *format, ...);
-char	*ft_itoa(int n);
-static int	ft_len(int nb);
-
-#endif 
+unsigned long long ft_hexcheck(int count, int digi, char *ans)
+{
+	if (count >= 10)
+		ans[digi] = ft_itoa(count + 87);
+	else
+		ans[digi] = count;
+	dst = dst / 16;
+}
