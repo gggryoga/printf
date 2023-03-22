@@ -6,13 +6,13 @@
 /*   By: rozeki <rozeki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:26:29 by rozeki            #+#    #+#             */
-/*   Updated: 2023/03/08 17:55:03 by rozeki           ###   ########.fr       */
+/*   Updated: 2023/03/21 11:11:01 by rozeki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-int ft_printchar(char c)
+int ft_putchar(char c)
 {
 	int	size;
 	
@@ -20,10 +20,10 @@ int ft_printchar(char c)
 	return (size);
 }
 
-int ft_printStr(char *str)
+int ft_putstr(char *str)
 {
 	int size;
-	size_t	count;
+	int	count;
 
 	size = 0;
 	count = 0;
@@ -47,7 +47,7 @@ int ft_printPointer(uintptr_t dst)
 	int		len;
 	char	*tmp;
 
-	tmp = ft_ultoa(dst);
+	//tmp = ft_ultoa(dst);
 	if (!tmp)
 		return (-1);
 	len = 0;
@@ -57,7 +57,7 @@ int ft_printPointer(uintptr_t dst)
 	return (len);
 }
 
-int	ft_sixteen(unsigned long long dst)
+int	ft_sixteen(unsigned long long dst, int flag)
 {
 	int	count;
 	char *ans;
@@ -65,15 +65,11 @@ int	ft_sixteen(unsigned long long dst)
 
 	ans = 0;
 	count = 0;
-	digi = 1;
+	digi = 0;
 	while ((dst / 16) >0)
 	{
 		count = dst % 16;
-		if (count >= 10)
-			ans[digi] = ft_itoa(count + 87);
-		else
-			ans[digi] = count;
-		dst = dst / 16;
+		ans = ft_hex(count, digi, ans, flag);
 		digi ++;
 	}
 	count = write(1, "0x", 2);
