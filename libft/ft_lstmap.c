@@ -1,57 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rozeki <rozeki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/11 12:39:07 by rozeki            #+#    #+#             */
-/*   Updated: 2023/03/08 16:56:07 by rozeki           ###   ########.fr       */
+/*   Created: 2022/12/11 12:38:41 by rozeki            #+#    #+#             */
+/*   Updated: 2022/12/11 12:38:42 by rozeki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_len(int nb)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int	len;
+	t_list	*ans;
+	t_list	*tmp;
 
-	len = 0;
-	if (nb <= 0)
-		len ++;
-	while (nb)
-	{
-		len++;
-		nb = nb / 10;
-	}
-	return (len);
-}
-
-char	*ft_itoa(int n)
-{
-	char	*h;
-	long	num;
-	int		len;
-
-	len = ft_len(n);
-	num = n;
-	h = malloc(sizeof(char) * len + 1);
-	if (h == NULL)
+	if (lst == NULL || f == NULL || del == NULL)
 		return (NULL);
-	if (num < 0)
+	ans = NULL;
+	while (lst)
 	{
-		h[0] = '-';
-		num = -num;
+		tmp = ft_lstnew(f(lst->content));
+		if (tmp == NULL)
+		{
+			ft_lstclear(&ans, del);
+			return (0);
+		}
+		ft_lstadd_back(&ans, tmp);
+		lst = lst->next;
 	}
-	h[len] = '\0';
-	len --;
-	if (num == 0)
-		h[len] = '0';
-	while (num)
-	{
-		h[len] = num % 10 + '0';
-		len --;
-		num = num / 10;
-	}
-	return (h);
+	return (ans);
 }

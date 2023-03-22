@@ -1,22 +1,25 @@
-CC = gcc
+CC	=	gcc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 AR = ar rcs
-NAME = printf.a
+NAME = libftprintf.a
 
-SRCS_LST	=	ft_printf.c 
+SRCS_LST	=	ft_printf.c	\
+				ft_putnum.c	\
+				ft_output.c
 
-SRCS_OBJS = $(SRCS_LST:.c = .o)
+SRCS_OBJS = $(SRCS_LST:.c=.o)
 
 $(NAME): $(SRCS_OBJS)
 		make -C libft
 		cp libft/libft.a ./
-		mv libf.a $(NAME)
+		mv libft.a $(NAME)
 		$(AR) $(NAME) $(SRCS_OBJS)
 
 all:	$(NAME)
 
-clean:	$(RM) $(SRCS_OBJS)
+clean:	
+		$(RM) $(SRCS_OBJS)
 		make clean -C libft
 
 fclean:	clean

@@ -6,7 +6,7 @@
 /*   By: rozeki <rozeki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 12:38:21 by rozeki            #+#    #+#             */
-/*   Updated: 2023/03/21 11:20:59 by rozeki           ###   ########.fr       */
+/*   Updated: 2022/12/11 13:38:38 by rozeki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int		ft_isascii(int c);
 int		ft_isprint(int c);
 size_t	ft_strlen(const char *str);
 void	*ft_memset(void *buf, int ch, size_t n);
-
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
