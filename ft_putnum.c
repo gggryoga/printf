@@ -6,7 +6,7 @@
 /*   By: rozeki <rozeki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 18:01:47 by rozeki            #+#    #+#             */
-/*   Updated: 2023/03/22 19:21:12 by rozeki           ###   ########.fr       */
+/*   Updated: 2023/03/23 16:11:40 by rozeki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_putnum(int n, int flag)
 {
-	char*	h;
+	char	*h;
 	int		count;
 
 	if (flag == 1)
@@ -59,15 +59,4 @@ int	ft_getdigit(unsigned int n)
 		digit ++;
 	}
 	return (digit);
-}
-
-char *ft_hexcheck(int count, char *ans, int flag)
-{
-	if (count >= 10 || flag == 1)
-		*ans = count + 'a' -10;
-	else if (count >= 10 || flag == 2)
-		*ans = count + 'A' -10;
-	else
-		*ans = count + '0';
-	return (ans);
 }

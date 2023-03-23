@@ -6,91 +6,108 @@
 /*   By: rozeki <rozeki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 15:26:29 by rozeki            #+#    #+#             */
-/*   Updated: 2023/03/22 20:01:39 by rozeki           ###   ########.fr       */
+/*   Updated: 2023/03/23 16:12:27 by rozeki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_putchar(char c)
+int	ft_putchar(char c)
 {
 	int	size;
-	
+
 	size = write (1, &c, 1);
 	return (size);
 }
 
-int ft_putstr(char *str)
+int	ft_putstr(char *str)
 {
-	int size;
-	int	count;
+	int	cnt;
+	int	byte;
 
-	size = 0;
-	count = 0;
+	cnt = 0;
+	byte = 0;
 	if (!str)
-		size = write(1, "(null)", 6);
-	else
 	{
-		while (str[count])
-		{
-			if (ft_putchar(*str) == -1)
-				return (-1);
-			size ++;
-		}
+		byte = write (1, "(null)", 6);
+		return (byte);
 	}
-	return (size);
+	while (str[cnt])
+	{
+		byte = write (1, &str[cnt], 1);
+		if (byte == -1)
+			return (-1);
+		cnt += byte;
+	}
+	return (cnt);
 }
 
-int ft_putpointer(uintptr_t dst)
+int	ft_putpointer(unsigned long long num)
 {
-	int		digi;
-	int		num;
-	char	*tmp;
+	char	*str;
+	int		digit;
+	int		cnt;
 
-	digi = ft_hex_size(dst);
-	
-	if (!tmp)
+	digit = ft_hex_size(num);
+	str = (char *)malloc(sizeof(char) * (digit + 1));
+	if (!str)
 		return (-1);
-	len = 0;
-	size = ft_putstr(tmp);
-	if (size == -1)
-	len += size;
-	return (len);
+	str[digit--] = '\0';
+	while (digit >= 0)
+	{
+		str[digit] = num % 16;
+		if (str[digit] < 10)
+			str[digit--] += '0';
+		else if (str[digit] > 9)
+			str[digit--] += 'a' - 10;
+		num /= 16;
+	}
+	cnt = write(1, "0x", 2);
+	cnt += ft_putstr(str);
+	if (cnt == -1)
+		return (-1);
+	free(str);
+	return (cnt);
 }
 
-int	ft_sixteen(unsigned long long dst, int flag)
+int	ft_sixteen(unsigned int dst, int flag)
 {
-	int	count;
-	char *ans;
-	int size;
+	char	*str;
+	int		digit;
+	int		cnt;
 
-	ans = 0;
-	count = 0;
-	size = 0;
-	while ((dst / 16) >0)
+	digit = ft_hex_size(dst);
+	str = (char *)malloc(sizeof(char) * (digit + 1));
+	if (!str)
+		return (-1);
+	str[digit--] = '\0';
+	while (digit >= 0)
 	{
-		count = dst % 16;
-		ans = ft_hexcheck(count, ans, flag);
-		ans ++;
+		str[digit] = dst % 16;
+		if (str[digit] < 10)
+			str[digit] += '0';
+		else if (str[digit] > 9 && flag == 1)
+			str[digit] += 'a' - 10;
+		else if (str[digit] > 9 && flag == 2)
+			str[digit] += 'A' - 10;
+		digit--;
+		dst /= 16;
 	}
-	count = write(1, "0x", 2);
-	while (size >= 0)
-	{
-		count = count + ft_putchar(*ans);
-		size --;
-		ans--;
-	}
-	return (count);
+	cnt = ft_putstr(str);
+	free(str);
+	return (cnt);
 }
 
-int ft_hex_size(unsigned long long dst)
+int	ft_hex_size(unsigned long long dst)
 {
-	int num;
+	int	num;
 
 	num = 0;
-	while ((dst / 16) > 0)
+	if (dst == 0)
+		return (1);
+	while (dst > 0)
 	{
-		dst = dst / 16;
+		dst /= 16;
 		num ++;
 	}
 	return (num);
